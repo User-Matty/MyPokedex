@@ -1,0 +1,231 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: PokemonGB;
+    src: url(Pokemon_GB.ttf);
+}
+body, html{
+    height: 100%;
+    background-color: #e84848;
+    font-family: PokemonGB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Pokedex{
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-height: 600px;
+    max-width: 900px;
+    
+    margin: 0 auto;
+}
+.Pokedex img{
+   width: 100%;
+}
+.BotoesPokedex{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.BotoesPokedex > .DisplayPokedex{
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    top: 39.3%;
+    left: 15.6%;
+    height: 20.58%;
+    width: 22%;
+    border: 1px solid rgb(82, 81, 81);
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 1px 1px 10px white;
+    z-index: 1;
+    background-color: transparent;
+    background-image: url(FundoPokemon.jpg);
+}
+.Pokedex > .Pokemon{
+    position: absolute;
+    display: none;
+    top: 41%;
+    left: 21%;
+    width: 9%;
+    z-index: 2;
+}
+.NomePokemon{
+    position: absolute;
+    top: 60.7%;
+    left: 19%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6%;
+    width: 15%;
+    padding: 1%;
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #414141a8;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    z-index: 1;
+}
+.NomePokemon > h3{
+    display: none;
+    height: 100%;
+    font-size: clamp(2px, 1vw, 0.6rem);
+
+}
+.IdPokemon{
+    position: absolute;
+    top: 82%;
+    left: 19.05%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6%;
+    width: 9%;
+    padding: 1% 0px;
+    overflow: hidden;
+    background-color: transparent;
+    color:white;
+    text-shadow: 1px 1px 3px #414141a8;
+}
+.IdPokemon > h3{
+    display: none;
+    height: 100%;
+    font-size: clamp(5px, 1vw, 0.6rem);
+}
+.Luz{
+    display: none;
+}
+.animate__animated.animate__fadeIn{
+    --animate-duration: 250ms;
+}
+.animate__animated.animate__fadeIn#display{
+    --animate-duration: 1s;
+}
+
+.LuzVermelha{
+    position: absolute;
+    top: 5.35%;
+    left: 19.7%;
+    height: 2.5%;
+    width: 1.7%;
+    border-radius: 15px;
+    background-color: red;
+    box-shadow: -6px -1px 12px red;
+}
+.LuzAmarela{
+    position: absolute;
+    top: 5.3%;
+    left: 23.42%;
+    height: 2.5%;
+    width: 1.7%;
+    border-radius: 15px;
+    background-color: yellow;
+    box-shadow: -6px -1px 12px yellow;
+}
+.LuzVerde{
+    position: absolute;
+    top: 5.3%;
+    left: 27%;
+    height: 2.5%;
+    width: 1.7%;
+    border-radius: 15px;
+    background-color: rgb(71, 223, 71);
+    box-shadow: -6px -1px 12px greenyellow;
+    
+}
+.OnOff{
+    position: absolute;
+    top: 62.18%;
+    left: 15.67%;
+    height: 3.8%;
+    width: 2.6%;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.BotDireita{
+    position: absolute;
+    top: 79.5%;
+    left: 38.8%;
+    height: 4.5%;
+    width: 2.8%;
+    background-color: transparent;
+    cursor: pointer;
+}
+.BotDireita:hover{
+    background-color: rgba(0, 0, 0, 0.09);
+}
+.BotEsquerda{
+    position: absolute;
+    top: 79.5%;
+    left: 32.7%;
+    height: 4.5%;
+    width: 2.8%;
+    background-color: transparent;
+    cursor: pointer;
+}
+.BotEsquerda:hover{
+    background-color: rgba(0, 0, 0, 0.09);
+}
+.BotCima{
+    position: absolute;
+    top: 75%;
+    left: 35.5%;
+    height: 4.5%;
+    width: 3.28%;
+    background-color: transparent;
+    cursor: pointer;
+}
+.BotCima:hover{
+    background-color: rgba(0, 0, 0, 0.09);
+}
+.BotBaixo{
+    position: absolute;
+    top: 84.1%;
+    left: 35.5%;
+    height: 4.5%;
+    width: 3.28%;
+    background-color: transparent;
+    cursor: pointer;
+}
+.BotBaixo:hover{
+    background-color: rgba(0, 0, 0, 0.09);
+}
+.BotoesPokedex > .PesquisaPokedex{
+    position: absolute;
+    display: none;
+    background-color: transparent;
+    top: 32.5%;
+    left: 60%;
+    height: 12%;
+    width: 26.5%;
+    border: none;
+    font-size: clamp(2px, 1vw, 1.1rem);;
+    padding-left: 1.5%;
+    color: grey;
+    font-family: PokemonGB;
+}
+.Musica{
+    position: absolute;
+    display: none;
+    background-color: transparent;
+    margin-top: -8px;
+    left: 11.56%;
+    height: 8%;
+    width: 5.1%;
+    top: 76.5%;
+    background-image: url(musica.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.3;
+    cursor: pointer;
+    border-radius: 30px;
+    border: 6px solid transparent;
+}

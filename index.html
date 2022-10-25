@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="Estilo.css">
+    <title>My Pokedex</title>
+    <link rel="shortcut icon" href="pokedex.ico" type="image/x-icon">
+</head>
+
+<body>
+    <main class="Pokedex">
+        <!-- box Pokedex  -->
+        <img src="Pokedex.png" alt=""></img><!-- Pokedex  -->
+        <img src="" class="Pokemon animate__animated animate__bounce">
+        <form action="" class="BotoesPokedex">
+            <!-- Botoes da Pokedex  -->
+            <div class="Luz LuzVermelha animate__animated animate__fadeIn"></div><!-- luz vermelha  -->
+            <div class="Luz LuzAmarela animate__animated animate__fadeIn"></div><!-- luz amarela  -->
+            <div class="Luz LuzVerde animate__animated animate__fadeIn"></div><!-- luz vermelha -->
+            <div class="DisplayPokedex animate__animated animate__fadeIn" id="display"></div><!-- Tela da Pokedex  -->
+            <div class="OnOff animate__animated animate__fadeIn"></div><!-- Botao on/off  -->
+            <div class="Musica"></div>
+            <div class="NomePokemon ">
+                <!-- Display nome pokemon  -->
+                <h3 class="animate__animated animate__lightSpeedInLeft"></h3>
+            </div>
+            <div class="IdPokemon">
+                <!-- Display id pokemon  -->
+                <h3 class="animate__animated animate__lightSpeedInRight"></h3>
+            </div>
+            <div class="BotDireita"></div><!-- Próximo pokemon  -->
+            <div class="BotEsquerda"></div><!-- Pokemon anterior  -->
+            <div class="BotCima"></div>
+            <div class="BotBaixo"></div>
+            <input type="search" class="PesquisaPokedex animate__animated animate__zoomIn"
+                placeholder="Buscar Pokemon..."><!-- Pesquisar pokemon  -->
+        </form>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+        window.onload = () => {
+            // ---------------------------------- Variáveis ----------------------------------
+            const pokemon = document.querySelector(".Pokemon");
+            const onOff = document.querySelector(".OnOff");
+            const display = document.querySelector(".DisplayPokedex");
+            const luzVermelha = document.querySelector(".LuzVermelha");
+            const luzAmarela = document.querySelector(".LuzAmarela");
+            const luzVerde = document.querySelector(".LuzVerde");
+            const nomePokemon = document.querySelector(".NomePokemon h3");
+            const idPokemon = document.querySelector(".IdPokemon h3");
+            const form = document.querySelector("form");
+            const pesquisaPokedex = document.querySelector(".PesquisaPokedex");
+            const botDireita = document.querySelector(".BotDireita");
+            const botEsquerda = document.querySelector(".BotEsquerda");
+            const musica = document.querySelector(".Musica");
+            var id = 1;
+            var contMusica = 1;
+            var contOnOff = 1;
+            musicaJogo = new Audio("MusicaPokedex.mp3");
+
+            // ---------------------------------- Funções ----------------------------------
+            const Nome = (nome) => {
+                return nome[0].toUpperCase() + nome.slice(1);
+            }
+            const fetchPokemon = async (datapokemon) => {
+                const APIres = await fetch(`https://pokeapi.co/api/v2/pokemon/${datapokemon}`);
+                const data = await APIres.json();
+                if (APIres.status != 200) {
+                    console.log("ERROR!!!")
+                }
+                return data;
+            }
+            const renderPokemon = async (pokemon) => {
+                const data = await fetchPokemon(pokemon);
+                nomePokemon.innerText = Nome(data.name);
+                idPokemon.innerText = "ID:" + data.id;
+                $(`.Pokemon`).attr("src", `${data["sprites"]["versions"]["generation-v"]["black-white"]["animated"]["front_default"]}`);
+            }
+            const tempoOn = (luz) => {
+                luz.style.display = "block";
+            }
+            ascenderLuzes = (() => {
+                setTimeout(() => {
+                    tempoOn(luzVermelha);
+                }, 0);
+                setTimeout(() => {
+                    tempoOn(luzAmarela);
+                }, 250);
+                setTimeout(() => {
+                    tempoOn(luzVerde);
+                }, 500);
+            })
+            const tempoOff = (luz) => {
+                luz.style.display = "none";
+            }
+            apagarLuzes = () => {
+                setTimeout(() => {
+                    tempoOff(luzVerde);
+                }, 0);
+                setTimeout(() => {
+                    tempoOff(luzAmarela);
+                }, 250);
+                setTimeout(() => {
+                    tempoOff(luzVermelha);
+                }, 500);
+            }
+            ligarDisplay = () => {
+                setTimeout(() => {
+                    display.style.backgroundImage = "url(nuvensPPT.gif)";
+                    display.style.display = "flex";
+                    display.innerHTML = `<h3 style="margin-left:10%; font-size: clamp(2px, 2vw, 1rem)" >Bem vindo</h3>`;
+                    onOff.style.backgroundColor = "rgb(71, 223, 71)";
+                    onOff.style.borderTop = "3px solid greenyellow";
+                    onOff.style.borderLeft = "3px solid greenyellow";
+                }, 0);
+                setTimeout(() => {
+                    display.style.backgroundImage = "url(FundoPokemon.png)";
+                    display.innerHTML = "";
+                }, 750);
+                setTimeout(() => {
+                    pokemon.style.display = "block";
+                    idPokemon.style.display = "block";
+                    nomePokemon.style.display = "block";
+                    pesquisaPokedex.style.display = "block";
+                    musica.style.display = "block";
+                }, 750);
+            }
+            desligarDisplay = () => {
+                setTimeout(() => {
+                    display.style.backgroundImage = "none";
+                    display.style.display = "none";
+                    display.innerHTML = "";
+                    onOff.style.backgroundColor = "transparent";
+                    onOff.style.borderTop = "none";
+                    onOff.style.borderLeft = "none";
+                    display.style.backgroundImage = "none";
+                    display.innerHTML = "";
+                    pokemon.style.display = "none";
+                    idPokemon.style.display = "none";
+                    nomePokemon.style.display = "none";
+                    pesquisaPokedex.style.display = "none";
+                    musica.style.display = "none";
+                }, 0);
+
+            }
+            // ---------------------------------- Programa ----------------------------------
+            onOff.addEventListener("click", () => {
+                contOnOff++;
+                if (contOnOff % 2 != 0) {
+                    apagarLuzes();
+                    desligarDisplay();
+                    if (contMusica % 2 == 0) {
+                        contMusica++;
+                        musicaJogo.pause();
+                    }
+                } else {
+                    clearTimeout();
+                    ascenderLuzes();
+                    ligarDisplay();
+                    id = 1;
+                    form.addEventListener("submit", (event) => {
+                        event.preventDefault();
+                        id = pesquisaPokedex.value;
+                        renderPokemon(id);
+                        pesquisaPokedex.value = ""
+                    })
+                    renderPokemon(id);
+                }
+            })
+            musica.addEventListener("click", () => {
+                contMusica++;
+                if (contMusica % 2 == 0) {
+                    musicaJogo.play();
+                }
+                else if (contMusica % 2 != 0) {
+                    musicaJogo.pause();
+                }
+            });
+            botDireita.addEventListener("click", () => {
+                if (id != 649) {
+                    id++;
+                }
+                renderPokemon(id);
+            });
+            botEsquerda.addEventListener("click", () => {
+                if (id != 1) {
+                    id--;
+                }
+                renderPokemon(id);
+            });
+        }
+    </script>
+</body>
+
+</html>
